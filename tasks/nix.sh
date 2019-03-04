@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+if [[ $EUID > 0 ]]
+then
+  echo "{\"Error\": \"Please run as root or sudo\"}"
+  exit 1
+fi
+
 if [ -n "$PT_timeout" ]; then
   timeout=$PT_timeout
 else
